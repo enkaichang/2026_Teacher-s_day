@@ -166,7 +166,7 @@ const TEACHER_QUIZ_DATA = {
       subject: "公民",
       themeColor: "#D4AF37",
       stepBadge: "基礎題 · 第 2 / 3 題",
-      question: "你說附屬制度究竟是憲法抄的不完全還是孫文的追求？",
+      question: "你說附屬制度究竟是憲法抄得不完全還是孫文的追求？",
       hint: "提示：。",
       options: [
         { text: "憲法抄的不完全", isCorrect: false },
