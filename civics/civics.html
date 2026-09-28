@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>致 公民老師 — 2026 教師節專屬賀卡</title>
+  <link rel="stylesheet" href="../global/global.css">
+  <link rel="stylesheet" href="civics.css">
+</head>
+<body class="theme-civics">
+
+  <!-- 頂部通用導覽 -->
+  <nav class="site-nav-bar">
+    <a href="../index.html" class="back-home-btn">← 返回科目首頁</a>
+  </nav>
+
+  <!-- 課前問答挑戰 (都答完才能看賀卡) -->
+  <section class="quiz-section" id="quiz-section">
+    <div class="quiz-header">
+      <span class="quiz-step-tag" id="quiz-step-tag">課前暖身 · 第 1 / 1 題</span>
+      <h2 class="quiz-title" id="quiz-title">載入問題中...</h2>
+      <p class="quiz-hint" id="quiz-hint"></p>
+    </div>
+
+    <div class="quiz-options-list" id="quiz-options-list"></div>
+    <div class="quiz-feedback" id="quiz-feedback"></div>
+  </section>
+
+  <!-- 賀卡展示舞台 (答題完成後解鎖) -->
+  <div class="card-stage-container" id="card-stage" style="display: none;">
+    <div class="book-container" id="book-civics">
+      <!-- 內頁 (始終可見，在封面後方) -->
+      <div class="book-inner-page">
+        <div class="inner-corner ic-tl"></div>
+        <div class="inner-corner ic-tr"></div>
+        <div class="inner-corner ic-bl"></div>
+        <div class="inner-corner ic-br"></div>
+
+        <div>
+          <div class="sub-title">CIVITAS · CONSTITUTIO</div>
+          <h2>致 鄭孟琳老師：</h2>
+          <div class="constitution-line">
+            <span class="constitution-label">ARTICLE</span>
+          </div>
+          <p class="quote">
+            現在雖然不小心把你的學習單搞丟了。但請不用擔心，因為，就算弄丟了，我們還是會對那些公民知識溫故知新。<br>在新的學校，少了可以陪學生練習幹話的老師，著實是有點無趣。<br>非常可惜，你下班的時候，我們還沒回到學校，沒辦法給你更多的幹話。<br><br>祝
+身心健康，學生都棒棒。
+          </p>
+        </div>
+
+        <div class="card-footer" style="margin-bottom: 20px;">
+          <div class="civic-latin">數學無法黨</div>
+          <div class="civic-latin">中華民國壹佰壹拾伍年</div>
+        </div>
+      </div>
+
+      <!-- 可翻開的封面 -->
+      <div class="book-cover" id="book-cover">
+        <div class="book-spine"></div>
+        <div class="cover-title-area">
+          <div class="cover-emblem">CONSTITUTIO</div>
+          <div class="cover-main-title">致 鄭孟琳老師</div>
+          <div class="cover-decorative-line"></div>
+          <div class="cover-year">MMXXVI</div>
+        </div>
+        <div class="cover-hint">— 點擊翻開 —</div>
+      </div>
+    </div>
+  </div>
+
+
+  <div id="toast"></div>
+
+  <script src="../global/questions.js"></script>
+  <script src="../global/global.js"></script>
+  <script>
+    // 初始化公民科問答，答對後啟動感性時光，隨後展開法典感謝信
+    initSubjectQuiz('civics', () => {
+      startEmotionalIntro({
+        subject: 'civics',
+        teacherName: '鄭孟琳老師',
+        cardTitle: '公民法典感謝信',
+        onComplete: () => {
+          const stage = document.getElementById('card-stage');
+          stage.style.display = 'flex';
+          stage.classList.add('card-stage-appear');
+
+          // 自動翻開法典封面展開感謝信
+          const bookCover = document.getElementById('book-cover');
+          let bookOpen = false;
+
+          setTimeout(() => {
+            if (!bookOpen) {
+              bookOpen = true;
+              bookCover.classList.add('opened');
+              showToast('📖 憲法典籍已為您翻開，請查閱感謝信！');
+            }
+          }, 500);
+
+          // 3D 翻書互動
+          bookCover.addEventListener('click', (e) => {
+            e.stopPropagation();
+            bookOpen = !bookOpen;
+            bookCover.classList.toggle('opened', bookOpen);
+            showToast(bookOpen ? '書本已翻開 📖' : '書本已闔上 📕');
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2026 教師節卡片 — 專屬師恩入口網站</title>
+  <link rel="stylesheet" href="global/global.css">
+  <style>
+    /* 淺色主題與極簡配色覆蓋 */
+    body {
+      background-color: #F8FAFC;
+      color: #1E293B;
+    }
+
+    .portal-container {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      max-width: 1100px;
+      padding: 3.5rem 1.5rem 5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .portal-hero {
+      max-width: 680px;
+      margin-bottom: 3rem;
+    }
+
+    .site-badge {
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      color: #475569;
+      background: #F1F5F9;
+      border: 1px solid #E2E8F0;
+      padding: 0.35rem 0.9rem;
+      border-radius: 9999px;
+      display: inline-block;
+      margin-bottom: 1.25rem;
+    }
+
+    .portal-hero h1 {
+      font-size: clamp(2rem, 4.5vw, 2.8rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: #0F172A;
+      margin-bottom: 1rem;
+    }
+
+    .portal-hero p {
+      font-size: 1.05rem;
+      color: #64748B;
+      line-height: 1.7;
+    }
+
+    /* 三大科目入口門戶卡片 - 淺色簡約無 hover 效果 */
+    .portal-doors-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.75rem;
+      width: 100%;
+    }
+
+    .portal-door-card {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 16px;
+      padding: 2.25rem 1.75rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      text-decoration: none;
+      color: inherit;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    }
+
+    .door-icon-box {
+      width: 56px;
+      height: 56px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.25rem;
+    }
+
+    .icon-math {
+      background: #EFF6FF;
+      color: #2563EB;
+      border: 1px solid #DBEAFE;
+    }
+
+    .icon-history {
+      background: #FEF3C7;
+      color: #92400E;
+      border: 1px solid #FDE68A;
+    }
+
+    .icon-civics {
+      background: #FEE2E2;
+      color: #B91C1C;
+      border: 1px solid #FECACA;
+    }
+
+    .door-badge {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.65rem;
+      border-radius: 6px;
+      margin-bottom: 0.75rem;
+    }
+
+    .badge-math {
+      color: #1D4ED8;
+      background: #DBEAFE;
+    }
+
+    .badge-history {
+      color: #92400E;
+      background: #FDE68A;
+    }
+
+    .badge-civics {
+      color: #B91C1C;
+      background: #FECACA;
+    }
+
+    .door-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #0F172A;
+      margin-bottom: 0.75rem;
+    }
+
+    .door-desc {
+      font-size: 0.95rem;
+      color: #64748B;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+      flex-grow: 1;
+    }
+
+    .door-action-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.7rem 1.4rem;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 0.92rem;
+      background: #0F172A;
+      color: #FFFFFF;
+      border: 1px solid #0F172A;
+    }
+
+    .portal-footer {
+      margin-top: 4rem;
+      color: #64748B;
+      font-size: 0.9rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .portal-footer a {
+      color: #2563EB;
+      text-decoration: underline;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="portal-container">
+    <header class="portal-hero">
+      <div class="site-badge">2026 教師節</div>
+      <h1>教師節大挑戰</h1>
+      <p>
+        想不到吧！都已經畢業了還要荼毒老師。<br>
+        特別選在教師節的最後當做娛樂節目！<del>絕對不是剛剛才意識到今天是教師節。</del>
+      </p>
+    </header>
+
+    <div class="portal-doors-grid">
+      <!-- 1. 數學老師入口 -->
+      <a href="mathematic/mathematic.html" class="portal-door-card door-math" id="enter-math">
+        <div class="door-icon-box icon-math">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 21H3L21 3v18Z"/>
+            <path d="M7 17h6v-6"/>
+          </svg>
+        </div>
+        <div class="door-badge badge-math">Mathematics</div>
+        <h2 class="door-title"><strong>楊</strong><span style="color: #475569;font-size: 1.2rem">老師</span> <strong>欣璇</strong></h2>
+        <p class="door-desc">
+          黨主席絞盡腦汁在各個地方埋哏。
+        </p>
+        <div class="door-action-btn">進入數學空間 →</div>
+      </a>
+
+      <!-- 2. 歷史老師入口 -->
+      <a href="history/history.html" class="portal-door-card door-history" id="enter-history">
+        <div class="door-icon-box icon-history">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M8 21h12a2 2 0 0 0 2-2v-2H10v2a2 2 0 1 1-4 0V5a2 2 0 1 0-4 0v3h4"/>
+            <path d="M19 17V5a2 2 0 0 0-2-2H4"/>
+            <path d="M10 7h6"/>
+            <path d="M10 11h4"/>
+          </svg>
+        </div>
+        <div class="door-badge badge-history">History</div>
+        <h2 class="door-title"><strong>湯</strong><span style="color: #475569;font-size: 1.2rem">老師</span> <strong>惠亘</strong></h2>
+        <p class="door-desc">
+          
+        </p>
+        <div class="door-action-btn">展開歷史手卷 →</div>
+      </a>
+
+      <!-- 3. 公民老師入口 -->
+      <a href="civics/civics.html" class="portal-door-card door-civics" id="enter-civics">
+        <div class="door-icon-box icon-civics">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/>
+            <path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/>
+            <path d="M7 21h10"/>
+            <path d="M12 3v18"/>
+            <path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/>
+          </svg>
+        </div>
+        <div class="door-badge badge-civics">Civics</div>
+        <h2 class="door-title"><strong>鄭</strong><span style="color: #475569;font-size: 1.2rem">老師</span> <strong>孟琳</strong></h2>
+        <p class="door-desc">
+          
+        </p>
+        <div class="door-action-btn">翻開公民法典 →</div>
+      </a>
+    </div>
+
+    <footer class="portal-footer">
+      <span>2026 Teacher's Day Celebration.</span>
+    </footer>
+  </div>
+
+  <script src="global/global.js"></script>
+</body>
+</html>

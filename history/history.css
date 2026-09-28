@@ -1,0 +1,499 @@
+/* ==========================================================================
+   歷史老師專屬樣式 (History CSS) — 文人典雅雙軸手卷
+   ========================================================================== */
+
+/* 載入本地隸書字體 (隸書.ttf) */
+@font-face {
+  font-family: 'LiSuCustom';
+  src: url('../global/隸書.ttf') format('truetype'),
+       url('../global/%E9%9A%B8%E6%9B%B8.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: '隸書';
+  src: url('../global/隸書.ttf') format('truetype'),
+       url('../global/%E9%9A%B8%E6%9B%B8.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+body.theme-history {
+  font-family: var(--font-lisu);
+}
+
+.scroll-container {
+  position: relative;
+  height: 540px;
+  min-height: 540px;
+  max-height: 540px;
+  border-radius: 20px;
+  background: radial-gradient(circle at 50% 50%, #131A21 0%, #0A0F14 100%);
+  box-shadow: 0 25px 50px -12px rgba(0,0,0,0.7);
+  overflow: hidden;
+  cursor: pointer;
+  perspective: 1200px;
+  user-select: none;
+  width: 100%;
+  max-width: 100%;
+}
+
+/* 卷軸底層紙身 (宣紙 + 藏青織錦邊飾) */
+.scroll-paper-body {
+  position: absolute;
+  inset: 12px;
+  border-radius: 6px;
+  background: linear-gradient(135deg, #132433 0%, #1A344A 50%, #132433 100%);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.6);
+  /* 核心展開過渡動畫：以中央為軸向左右展開 */
+  clip-path: inset(0 calc(50% - 15px) 0 calc(50% - 15px));
+  transition: clip-path 0.75s cubic-bezier(0.25, 1, 0.35, 1);
+}
+.scroll-container.opened .scroll-paper-body {
+  clip-path: inset(0 0% 0 0%);
+}
+
+/* 綾絹四邊織錦邊框紋理 */
+.brocade-border-top, .brocade-border-bottom {
+  position: absolute; left: 0; right: 0; height: 16px;
+  background: repeating-linear-gradient(90deg, #1B3850 0px, #1B3850 8px, #152B3E 8px, #152B3E 16px);
+  box-shadow: inset 0 0 0 1px rgba(197,160,89,0.3);
+  z-index: 2;
+}
+.brocade-border-top { top: 0; border-bottom: 1px solid rgba(197,160,89,0.4); }
+.brocade-border-bottom { bottom: 0; border-top: 1px solid rgba(197,160,89,0.4); }
+
+.brocade-border-left, .brocade-border-right {
+  position: absolute; top: 0; bottom: 0; width: 14px;
+  background: repeating-linear-gradient(180deg, #1B3850 0px, #1B3850 8px, #152B3E 8px, #152B3E 16px);
+  z-index: 2;
+}
+.brocade-border-left { left: 0; border-right: 1px solid rgba(197,160,89,0.4); }
+.brocade-border-right { right: 0; border-left: 1px solid rgba(197,160,89,0.4); }
+
+/* 米黃溫潤老宣紙核心 */
+.rice-paper-core {
+  position: absolute;
+  inset: 16px 14px;
+  background-color: #F7F3E8;
+  border: 1px solid rgba(197, 160, 89, 0.4);
+  background-image:
+    radial-gradient(ellipse at 50% 95%, rgba(30, 48, 65, 0.07) 0%, transparent 60%),
+    radial-gradient(ellipse at 85% 15%, rgba(197, 160, 89, 0.08) 0%, transparent 40%),
+    repeating-linear-gradient(0deg, transparent 0px, transparent 2px, rgba(160,140,110,0.02) 3px, transparent 4px);
+  border-radius: 2px;
+  padding: 1.8rem 1.8rem 1.5rem 1.8rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #1A120B;
+  font-family: var(--font-lisu);
+  position: relative;
+  z-index: 3;
+}
+
+/* 右上方朱砂引首章「啟智」 */
+.seal-intro {
+  position: absolute;
+  top: 18px;
+  right: 20px;
+  width: 24px;
+  height: 42px;
+  border-radius: 12px;
+  background: #B82222;
+  color: #FFFDF9;
+  font-family: var(--font-lisu);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.15em;
+  writing-mode: vertical-rl;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid #82150E;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.25), 0 3px 6px rgba(184,34,34,0.3);
+  transform: rotate(1deg);
+}
+
+.scroll-header { position: relative; z-index: 4; }
+.scroll-sub-badge {
+  font-family: var(--font-lisu);
+  font-size: 0.8rem;
+  letter-spacing: 0.18em;
+  color: #7A3518;
+  font-weight: 700;
+}
+.scroll-title {
+  font-family: var(--font-lisu);
+  font-size: 1.6rem;
+  font-weight: 900;
+  margin: 0.5rem 0 0.8rem;
+  color: #15222E;
+  letter-spacing: 0.06em;
+  line-height: 1.35;
+  text-shadow: 0 1px 1px rgba(0,0,0,0.15);
+}
+.scroll-motto {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(197, 160, 89, 0.18);
+  border-left: 3px solid #C5A059;
+  padding: 0.35rem 0.8rem;
+  border-radius: 0 4px 4px 0;
+  font-family: var(--font-lisu);
+  font-size: 0.92rem;
+  color: #8C2518;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  margin-bottom: 1rem;
+}
+
+.scroll-quote {
+  font-family: var(--font-lisu);
+  font-size: 0.98rem;
+  line-height: 1.85;
+  color: #2D2016;
+  letter-spacing: 0.04em;
+  position: relative;
+  z-index: 4;
+}
+.scroll-quote strong {
+  color: #8C2518;
+  font-weight: 900;
+  text-shadow: 0 0 1px rgba(140,37,24,0.2);
+}
+
+.scroll-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  position: relative;
+  z-index: 4;
+  padding-top: 1.2rem;
+  border-top: 1px dashed rgba(197, 160, 89, 0.4);
+}
+.scroll-year {
+  font-family: var(--font-lisu);
+  font-size: 0.82rem;
+  color: #6A4526;
+  letter-spacing: 0.12em;
+}
+
+/* 秦漢朱砂方印「師恩如山」 */
+.seal-main {
+  width: 44px;
+  height: 44px;
+  background: #B82222;
+  color: #FFFDF9;
+  font-family: var(--font-lisu);
+  font-size: 0.84rem;
+  font-weight: 900;
+  line-height: 1.15;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #82150E;
+  box-shadow: inset 0 0 0 1.5px rgba(255,255,255,0.25), 0 3px 8px rgba(184,34,34,0.35);
+  border-radius: 4px;
+  letter-spacing: 0.05em;
+  transform: rotate(-1.5deg);
+  text-shadow: 0 0 1px rgba(0,0,0,0.3);
+}
+
+/* 左右雙實木軸桿 (Rollers) */
+.scroll-roller {
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 22px;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  pointer-events: none;
+  transition: all 0.75s cubic-bezier(0.25, 1, 0.35, 1);
+}
+.roller-left {
+  left: calc(50% - 20px);
+  filter: drop-shadow(-3px 0 6px rgba(0,0,0,0.6));
+}
+.roller-right {
+  right: calc(50% - 20px);
+  filter: drop-shadow(3px 0 6px rgba(0,0,0,0.6));
+}
+
+.scroll-container.opened .roller-left { left: 4px; }
+.scroll-container.opened .roller-right { right: 4px; }
+
+/* 軸木本體 (圓柱實木漸層) */
+.roller-rod {
+  width: 14px;
+  height: calc(100% - 32px);
+  background: linear-gradient(
+    90deg,
+    #1E0F07 0%,
+    #4A2B15 30%,
+    #7B4E2B 60%,
+    #4A2B15 85%,
+    #1A0C05 100%
+  );
+  border-radius: 3px;
+  box-shadow: inset 0 0 2px rgba(255,255,255,0.2);
+}
+
+/* 軸頭 (黃銅古金包頭) */
+.roller-cap {
+  width: 20px;
+  height: 16px;
+  background: radial-gradient(circle at 35% 35%, #F0D597 0%, #C5A059 65%, #6B4E1B 100%);
+  border-radius: 4px;
+  border: 1px solid rgba(255,255,255,0.4);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+}
+
+/* 初始合攏時覆蓋的題簽、絲絛紅繩與提示 */
+.scroll-closed-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 15;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  transition: opacity 0.35s ease, transform 0.4s ease;
+}
+.scroll-container.opened .scroll-closed-overlay {
+  opacity: 0;
+  transform: scale(0.92);
+}
+
+/* 橫貫絲絛紅繩 */
+.scroll-tie-cord {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  right: 10px;
+  height: 12px;
+  transform: translateY(-50%);
+  background: repeating-linear-gradient(
+    -45deg,
+    #6B1C14 0px,
+    #6B1C14 3px,
+    #9B281D 3px,
+    #9B281D 6px
+  );
+  box-shadow: 0 3px 8px rgba(0,0,0,0.6);
+  border-radius: 2px;
+}
+
+/* 直式古典題簽標籤 */
+.scroll-tie-tag {
+  position: relative;
+  z-index: 16;
+  background: #F7F3E8;
+  border: 2px solid #82150E;
+  border-radius: 4px;
+  padding: 1.1rem 0.55rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.45rem;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+  font-family: var(--font-lisu);
+}
+.tag-sub {
+  font-size: 0.72rem;
+  color: #82150E;
+  letter-spacing: 0.15em;
+  writing-mode: vertical-rl;
+}
+.tag-main {
+  font-size: 1.3rem;
+  font-weight: 900;
+  color: #1A120B;
+  letter-spacing: 0.15em;
+  writing-mode: vertical-rl;
+}
+.tag-status {
+  font-size: 0.72rem;
+  background: #82150E;
+  color: #FFFDF9;
+  padding: 0.2rem 0.35rem;
+  border-radius: 2px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 2rem;
+  font-size: 0.8rem;
+  color: rgba(229, 195, 122, 0.75);
+  letter-spacing: 0.12em;
+  animation: hintPulse 2s ease-in-out infinite;
+}
+
+@keyframes hintPulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+/* ==========================================================================
+   歷史課前問答 — 文人宣紙織錦特色樣式 (History Quiz Theme)
+   ========================================================================== */
+.quiz-section.quiz-history {
+  background-color: #F7F3E8;
+  border: 4px solid #162B3D;
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.6),
+    inset 0 0 0 2px rgba(197, 160, 89, 0.6);
+  background-image:
+    radial-gradient(ellipse at 50% 90%, rgba(30, 48, 65, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, rgba(197, 160, 89, 0.08) 0%, transparent 40%),
+    repeating-linear-gradient(0deg, transparent 0px, transparent 2px, rgba(160,140,110,0.03) 3px, transparent 4px);
+  color: #1A120B;
+  font-family: var(--font-lisu);
+  border-radius: 20px;
+}
+
+.quiz-section.quiz-history .quiz-step-tag {
+  color: #B82222;
+  background: rgba(184, 34, 34, 0.08);
+  border: 1.5px solid #82150E;
+  font-family: var(--font-lisu);
+  letter-spacing: 0.15em;
+  font-weight: 700;
+}
+
+.quiz-section.quiz-history .quiz-title {
+  color: #15222E;
+  font-family: var(--font-lisu);
+  letter-spacing: 0.06em;
+  line-height: 1.45;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
+}
+
+.quiz-section.quiz-history .quiz-hint {
+  color: #7A4526;
+  font-family: var(--font-lisu);
+  letter-spacing: 0.05em;
+}
+
+.quiz-section.quiz-history .quiz-option-btn {
+  background: rgba(240, 232, 216, 0.85);
+  border: 1px solid rgba(197, 160, 89, 0.5);
+  color: #2C1E14;
+  font-family: var(--font-lisu);
+  font-size: 1.05rem;
+  letter-spacing: 0.04em;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.quiz-section.quiz-history .quiz-option-btn .opt-prefix {
+  font-family: var(--font-lisu);
+  font-weight: 900;
+  color: #FFFDF9;
+  background: #B82222;
+  border: 1.5px solid #82150E;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(184, 34, 34, 0.3);
+}
+
+.quiz-section.quiz-history .quiz-option-btn:hover {
+  background: #FFFDF8;
+  border-color: #B82222;
+  box-shadow: 0 6px 16px rgba(184, 34, 34, 0.15);
+  transform: translateY(-2px);
+  color: #15222E;
+}
+
+.quiz-section.quiz-history .quiz-option-btn.correct {
+  background: rgba(184, 34, 34, 0.12);
+  border-color: #B82222;
+  border-style: solid;
+  color: #7F1D1D;
+  box-shadow: 0 4px 14px rgba(184, 34, 34, 0.18);
+}
+.quiz-section.quiz-history .quiz-option-btn.correct .opt-prefix {
+  background: #B82222;
+  color: #FFFDF9;
+  border-color: #82150E;
+}
+
+.quiz-section.quiz-history .quiz-option-btn.wrong {
+  background: rgba(239, 68, 68, 0.15);
+  border-color: #DC2626;
+  border-style: solid;
+  color: #991B1B;
+}
+
+/* 歷史科反饋提示：秦漢朱砂紅與文人隸書 */
+.quiz-section.quiz-history .quiz-feedback.success {
+  color: #8A1C12;
+  font-family: var(--font-lisu);
+  font-size: 1.12rem;
+  letter-spacing: 0.08em;
+  text-shadow: 0 1px 2px rgba(138, 28, 18, 0.2);
+}
+
+.quiz-section.quiz-history .quiz-feedback.error {
+  color: #991B1B;
+  font-family: var(--font-lisu);
+  font-size: 1.05rem;
+}
+
+/* 手機版響應式滿版與邊距適配 */
+@media (max-width: 640px) {
+  .scroll-container {
+    width: 100%;
+    max-width: 100%;
+    min-height: 520px;
+    height: auto;
+    max-height: none;
+  }
+  .scroll-paper-body {
+    inset: 8px;
+  }
+  .rice-paper-core {
+    inset: 12px 10px;
+    padding: 1.5rem 1.1rem 1.2rem;
+  }
+  .scroll-title {
+    font-size: 1.28rem;
+    margin: 0.4rem 0 0.6rem;
+  }
+  .scroll-sub-badge {
+    font-size: 0.75rem;
+  }
+  .scroll-motto {
+    font-size: 0.82rem;
+    padding: 0.25rem 0.6rem;
+    margin-bottom: 0.75rem;
+  }
+  .scroll-quote {
+    font-size: 0.88rem;
+    line-height: 1.75;
+  }
+  .seal-intro {
+    top: 10px;
+    right: 10px;
+    width: 20px;
+    height: 36px;
+    font-size: 0.65rem;
+  }
+  .seal-main {
+    width: 38px;
+    height: 38px;
+    font-size: 0.76rem;
+  }
+  .scroll-footer {
+    padding-top: 0.9rem;
+  }
+}
+

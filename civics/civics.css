@@ -1,0 +1,399 @@
+/* ==========================================================================
+   公民老師專屬樣式 (Civics CSS) — 3D 翻書大典
+   ========================================================================== */
+
+.book-container {
+  position: relative;
+  height: 540px;
+  min-height: 540px;
+  max-height: 540px;
+  perspective: 1500px;
+  cursor: pointer;
+  width: 100%;
+  max-width: 100%;
+}
+
+/* 內頁 (永遠在後方) */
+.book-inner-page {
+  position: absolute;
+  inset: 0;
+  border-radius: 4px 24px 24px 4px;
+  background-color: #F5F0E8;
+  padding: 2.5rem 2.2rem 2.2rem 2.8rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow:
+    0 25px 50px -12px rgba(0,0,0,0.6),
+    inset 25px 0 35px -15px rgba(0,0,0,0.2),
+    inset 0 0 0 1px rgba(0,0,0,0.06);
+  color: #2D231E;
+  font-family: 'Noto Serif TC', serif;
+  overflow: hidden;
+}
+
+/* 內頁邊角金色折飾 */
+.inner-corner {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-color: rgba(212,175,55,0.45);
+  pointer-events: none;
+}
+.ic-tl { top: 16px; left: 24px; border-top: 1.5px solid; border-left: 1.5px solid; }
+.ic-tr { top: 16px; right: 16px; border-top: 1.5px solid; border-right: 1.5px solid; }
+.ic-bl { bottom: 16px; left: 24px; border-bottom: 1.5px solid; border-left: 1.5px solid; }
+.ic-br { bottom: 16px; right: 16px; border-bottom: 1.5px solid; border-right: 1.5px solid; }
+
+/* 內頁左側裝訂陰影線條 */
+.book-inner-page::before {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0; left: 16px; width: 1px;
+  background: linear-gradient(180deg, transparent, rgba(0,0,0,0.12) 20%, rgba(0,0,0,0.12) 80%, transparent);
+}
+
+.book-inner-page .sub-title {
+  font-family: 'Cinzel', serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.22em;
+  color: #8B1A1A;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.book-inner-page h2 {
+  font-family: 'Noto Serif TC','Cinzel',serif;
+  font-size: 1.65rem;
+  font-weight: 900;
+  margin: 0.5rem 0 1rem;
+  color: #1A1412;
+  letter-spacing: 0.03em;
+  line-height: 1.35;
+}
+
+.constitution-line {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 1.3rem;
+}
+.constitution-line::before, .constitution-line::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(139,26,26,0.3), transparent);
+}
+.constitution-label {
+  font-family: 'Cinzel',serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  color: #8B1A1A;
+  font-weight: 700;
+}
+
+.book-inner-page .quote {
+  font-size: 0.98rem;
+  line-height: 1.85;
+  color: #382E2B;
+}
+.book-inner-page .quote strong {
+  color: #8B1A1A;
+}
+
+.book-inner-page .card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(139,26,26,0.2);
+}
+
+.civic-latin {
+  font-family: 'Cinzel',serif;
+  font-size: 0.76rem;
+  color: #6B4E3D;
+  font-style: italic;
+}
+
+/* 公義金印 */
+.civic-seal {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #D4AF37 0%, #AA820A 70%, #7D5E04 100%);
+  box-shadow: 0 4px 10px rgba(170,130,10,0.35), inset 0 1px 3px rgba(255,255,255,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #3E2F05;
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  writing-mode: vertical-lr;
+  border: 1px solid rgba(255,255,255,0.3);
+}
+
+/* ========================================= */
+/* 可翻開的封面 (The 3D Flappable Cover)       */
+/* ========================================= */
+.book-cover {
+  position: absolute;
+  inset: 0;
+  border-radius: 4px 24px 24px 4px;
+  background-color: #8B1A1A;
+  box-shadow:
+    0 25px 50px -12px rgba(0,0,0,0.8),
+    inset 0 0 40px rgba(0,0,0,0.4);
+  transform-origin: left center;
+  transition: transform 0.8s cubic-bezier(0.25, 1, 0.35, 1), box-shadow 0.8s ease;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 2rem;
+  text-align: center;
+  overflow: hidden;
+}
+
+.book-cover.opened {
+  transform: rotateY(-160deg);
+  box-shadow: 20px 25px 50px rgba(0,0,0,0.4);
+}
+
+/* 封面皮革紋理 */
+.book-cover::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(0deg, transparent 0px, rgba(0,0,0,0.03) 1px, transparent 2px, transparent 3px),
+    repeating-linear-gradient(90deg, transparent 0px, rgba(0,0,0,0.02) 1px, transparent 2px, transparent 4px),
+    radial-gradient(ellipse at 30% 30%, rgba(255,255,255,0.08) 0%, transparent 40%);
+  pointer-events: none;
+}
+
+/* 封面金色邊框 */
+.book-cover::after {
+  content: '';
+  position: absolute;
+  inset: 12px;
+  border: 2px solid rgba(212,175,55,0.5);
+  border-radius: 2px 16px 16px 2px;
+  pointer-events: none;
+}
+
+/* 封面書脊厚度 */
+.book-spine {
+  position: absolute;
+  top: 0; bottom: 0; left: -3px; width: 6px;
+  background: linear-gradient(90deg, #4A1010, #601414);
+  border-radius: 3px 0 0 3px;
+  transform: translateZ(-3px);
+}
+
+.cover-title-area {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.cover-emblem {
+  font-family: 'Cinzel',serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.25em;
+  color: #D4AF37;
+  text-transform: uppercase;
+  font-weight: 700;
+  border: 1px solid rgba(212,175,55,0.4);
+  padding: 0.3rem 0.8rem;
+  border-radius: 4px;
+}
+
+.cover-main-title {
+  font-family: 'Noto Serif TC',serif;
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: #F5E6B8;
+  letter-spacing: 0.06em;
+  line-height: 1.4;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.cover-decorative-line {
+  width: 80px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #D4AF37, transparent);
+}
+
+.cover-year {
+  font-family: 'Cinzel',serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #D4AF37;
+  letter-spacing: 0.3em;
+}
+
+.cover-hint {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.78rem;
+  color: rgba(212,175,55,0.6);
+  letter-spacing: 0.05em;
+  z-index: 2;
+  animation: hintPulse 2s ease-in-out infinite;
+}
+
+/* ==========================================================================
+   公民課前問答 — 憲法大典皮革燙金特色樣式 (Civics Quiz Theme)
+   ========================================================================== */
+.quiz-section.quiz-civics {
+  background-color: #7A1414;
+  background-image:
+    radial-gradient(circle at 50% 20%, #9B1C1C 0%, #5C0C0C 100%),
+    repeating-linear-gradient(0deg, transparent 0px, rgba(0,0,0,0.04) 1px, transparent 2px, transparent 3px);
+  border: 2px solid rgba(212, 175, 55, 0.7);
+  box-shadow:
+    0 25px 50px rgba(0, 0, 0, 0.7),
+    inset 0 0 35px rgba(0, 0, 0, 0.4),
+    inset 0 0 0 1px rgba(212, 175, 55, 0.4);
+  color: #FFF5EA;
+  font-family: 'Noto Serif TC', serif;
+  border-radius: 20px;
+}
+
+.quiz-section.quiz-civics .quiz-step-tag {
+  color: #D4AF37;
+  background: rgba(212, 175, 55, 0.12);
+  border: 1px solid rgba(212, 175, 55, 0.45);
+  font-family: 'Cinzel', serif;
+  letter-spacing: 0.18em;
+  font-weight: 700;
+}
+
+.quiz-section.quiz-civics .quiz-title {
+  color: #F5E6B8;
+  font-family: 'Noto Serif TC', serif;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  letter-spacing: 0.04em;
+}
+
+.quiz-section.quiz-civics .quiz-hint {
+  color: #E2D2BC;
+  font-family: 'Noto Serif TC', serif;
+}
+
+.quiz-section.quiz-civics .quiz-option-btn {
+  background: rgba(45, 8, 8, 0.65);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  color: #FFFDF9;
+  border-radius: 10px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+  transition: all 0.25s ease;
+}
+
+.quiz-section.quiz-civics .quiz-option-btn .opt-prefix {
+  font-family: 'Cinzel', serif;
+  font-weight: 900;
+  color: #D4AF37;
+  background: rgba(212, 175, 55, 0.15);
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  border-radius: 6px;
+}
+
+.quiz-section.quiz-civics .quiz-option-btn:hover {
+  background: rgba(90, 15, 15, 0.85);
+  border-color: #D4AF37;
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.25);
+  transform: translateY(-2px);
+}
+
+.quiz-section.quiz-civics .quiz-option-btn.correct {
+  background: rgba(212, 175, 55, 0.22);
+  border-color: #D4AF37;
+  border-style: solid;
+  color: #FFFDF5;
+  box-shadow: 0 0 18px rgba(212, 175, 55, 0.35);
+}
+.quiz-section.quiz-civics .quiz-option-btn.correct .opt-prefix {
+  background: #D4AF37;
+  color: #2D0808;
+  border-color: #D4AF37;
+}
+
+.quiz-section.quiz-civics .quiz-option-btn.wrong {
+  background: rgba(239, 68, 68, 0.25);
+  border-color: #EF4444;
+  border-style: solid;
+  color: #FCA5A5;
+}
+
+/* 公民科反饋提示：憲法燙金與金色光芒 */
+.quiz-section.quiz-civics .quiz-feedback.success {
+  color: #F5E6B8;
+  font-family: 'Noto Serif TC', serif;
+  font-size: 1.05rem;
+  text-shadow: 0 0 12px rgba(212, 175, 55, 0.45);
+  letter-spacing: 0.03em;
+}
+
+.quiz-section.quiz-civics .quiz-feedback.error {
+  color: #FCA5A5;
+  text-shadow: 0 0 8px rgba(239, 68, 68, 0.3);
+}
+
+/* 手機版響應式滿版與邊距適配 */
+@media (max-width: 640px) {
+  .book-container {
+    width: 100%;
+    max-width: 100%;
+    min-height: 520px;
+    height: auto;
+    max-height: none;
+  }
+  .book-inner-page {
+    padding: 2rem 1.4rem 1.6rem;
+    border-radius: 4px 16px 16px 4px;
+  }
+  .book-inner-page h2 {
+    font-size: 1.35rem;
+    line-height: 1.35;
+    margin: 0.4rem 0 0.6rem;
+  }
+  .book-inner-page .sub-title {
+    font-size: 0.78rem;
+  }
+  .constitution-line {
+    margin-bottom: 0.85rem;
+  }
+  .book-inner-page .quote {
+    font-size: 0.9rem;
+    line-height: 1.75;
+  }
+  .book-inner-page .card-footer {
+    padding-top: 1rem;
+  }
+  .civic-seal {
+    width: 44px;
+    height: 44px;
+    font-size: 0.62rem;
+  }
+  .civic-latin {
+    font-size: 0.72rem;
+  }
+  .book-cover {
+    padding: 2.2rem 1.4rem;
+  }
+  .cover-main-title {
+    font-size: 1.4rem;
+  }
+}
+

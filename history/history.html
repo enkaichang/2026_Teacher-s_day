@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>致 歷史老師 — 2026 教師節專屬賀卡</title>
+  <link rel="stylesheet" href="../global/global.css">
+  <link rel="stylesheet" href="history.css">
+</head>
+<body class="theme-history">
+
+  <!-- 頂部通用導覽 -->
+  <nav class="site-nav-bar">
+    <a href="../index.html" class="back-home-btn">← 返回科目首頁</a>
+  </nav>
+
+  <!-- 課前問答挑戰 (都答完才能看賀卡) -->
+  <section class="quiz-section" id="quiz-section">
+    <div class="quiz-header">
+      <span class="quiz-step-tag" id="quiz-step-tag">課前暖身 · 第 1 / 1 題</span>
+      <h2 class="quiz-title" id="quiz-title">載入問題中...</h2>
+      <p class="quiz-hint" id="quiz-hint"></p>
+    </div>
+
+    <div class="quiz-options-list" id="quiz-options-list"></div>
+    <div class="quiz-feedback" id="quiz-feedback"></div>
+  </section>
+
+  <!-- 賀卡展示舞台 (答題完成後解鎖) -->
+  <div class="card-stage-container" id="card-stage" style="display: none;">
+    <div class="scroll-container" id="scroll-history">
+      <!-- 展開後的宣紙書畫卷芯 (在底層，隨卷軸展開而顯現) -->
+      <div class="scroll-paper-body">
+        <!-- 裝裱綾絹外緣 (藏青織錦邊飾) -->
+        <div class="brocade-border-top"></div>
+        <div class="brocade-border-bottom"></div>
+        <div class="brocade-border-left"></div>
+        <div class="brocade-border-right"></div>
+
+        <!-- 宣紙核心內容區 (米黃熟宣紙 + 水墨遠山暗紋) -->
+        <div class="rice-paper-core">
+
+          <!-- 卷軸標題與橫批題跋 (隸書橫排) -->
+          <div class="scroll-header">
+            <h2 class="scroll-title">致 湯惠亘老師：</h2>
+            <div class="scroll-motto">
+              <span>以史為鑑知興替 &ensp;·&ensp; 卷舒墨韻啟後人</span>
+            </div>
+          </div>
+
+          <!-- 賀詞正文 (隸書橫排) -->
+          <p class="scroll-quote">
+            自辭別 諄諄教誨，念想與日巨增。惟願 福體安康，不為學生憤恨，一切安好，切勿掛念。
+            今來信乃為慶祝 壇席教師節快樂，時值秋日，生不能在 您左右做蠢事，實屬可惜。<br>大人珍攝為禱。肅此上稟，恭請
+教安。
+          </p>
+
+          <!-- 卷末落款與朱砂方印「師恩如山」 -->
+          <div class="scroll-footer">
+            <div class="scroll-year">中華民國壹佰壹拾伍年 玖月 廿捌日 <br> 數學無法黨</div>
+            <div class="seal-main">師恩<br>如山</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 初始合攏時覆蓋在正中央的絲絛紅繩、古典題簽與呼吸提示 -->
+      <div class="scroll-closed-overlay" id="scroll-overlay">
+        <!-- 橫貫絲絛紅繩 -->
+        <div class="scroll-tie-cord"></div>
+        <!-- 直式古典題簽 (正中標籤) -->
+        <div class="scroll-tie-tag">
+          <span class="tag-sub">壹佰壹拾伍年</span>
+          <span class="tag-main">致 湯惠亘老師</span>
+          <span class="tag-status">啟卷</span>
+        </div>
+        <div class="scroll-hint">— 點擊展卷 —</div>
+      </div>
+
+      <!-- 左軸木 (左側實木軸桿 + 金銅軸頭) -->
+      <div class="scroll-roller roller-left" id="roller-left">
+        <div class="roller-cap cap-top"></div>
+        <div class="roller-rod"></div>
+        <div class="roller-cap cap-bottom"></div>
+      </div>
+
+      <!-- 右軸木 (右側實木軸桿 + 金銅軸頭) -->
+      <div class="scroll-roller roller-right" id="roller-right">
+        <div class="roller-cap cap-top"></div>
+        <div class="roller-rod"></div>
+        <div class="roller-cap cap-bottom"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast"></div>
+
+  <script src="../global/questions.js"></script>
+  <script src="../global/global.js"></script>
+  <script>
+    // 初始化歷史科問答，答對後啟動感性時光，隨後展開典藏手卷
+    initSubjectQuiz('history', () => {
+      startEmotionalIntro({
+        subject: 'history',
+        teacherName: '湯惠亘老師',
+        cardTitle: '典藏御製手卷',
+        onComplete: () => {
+          const stage = document.getElementById('card-stage');
+          stage.style.display = 'flex';
+          stage.classList.add('card-stage-appear');
+
+          // 自動徐徐展開手卷
+          const scrollHistory = document.getElementById('scroll-history');
+          let scrollOpen = false;
+
+          setTimeout(() => {
+            if (!scrollOpen) {
+              scrollOpen = true;
+              scrollHistory.classList.add('opened');
+              showToast('📜 御製手卷已為您展開，請查閱感謝信！');
+            }
+          }, 500);
+
+          // 手卷點擊展開 / 收攏互動
+          scrollHistory.addEventListener('click', () => {
+            scrollOpen = !scrollOpen;
+            scrollHistory.classList.toggle('opened', scrollOpen);
+            showToast(scrollOpen ? '手卷已展開 📜' : '手卷已收攏 📜');
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>

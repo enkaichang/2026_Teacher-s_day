@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>致 數學老師 — 2026 教師節專屬賀卡</title>
+  <link rel="stylesheet" href="../global/global.css">
+  <link rel="stylesheet" href="mathematic.css">
+</head>
+<body class="theme-math">
+
+  <!-- 頂部通用導覽 -->
+  <nav class="site-nav-bar">
+    <a href="../index.html" class="back-home-btn">← 返回科目首頁</a>
+  </nav>
+
+  <!-- 課前問答挑戰 (都答完才能看賀卡) -->
+  <section class="quiz-section" id="quiz-section">
+    <div class="quiz-header">
+      <span class="quiz-step-tag" id="quiz-step-tag">課前暖身 · 第 1 / 1 題</span>
+      <h2 class="quiz-title" id="quiz-title">載入問題中...</h2>
+      <p class="quiz-hint" id="quiz-hint"></p>
+    </div>
+
+    <div class="quiz-options-list" id="quiz-options-list"></div>
+    <div class="quiz-feedback" id="quiz-feedback"></div>
+  </section>
+
+  <!-- 賀卡展示舞台 (答題完成後解鎖) -->
+  <div class="card-stage-container" id="card-stage" style="display: none;">
+    <div class="card-math" id="card-math-elem">
+      <div class="chalk-dust"></div>
+      <div class="card-header">
+        <div class="sub-title">MATHEMATICS · CHALKBOARD</div>
+        <h2>致 楊欣璇老師：</h2>
+        <div class="formula-badge">
+          <span>a<sup>2</sup> + b<sup>2</sup> = c<sup>2</sup></span>
+        </div>
+        <p class="quote">
+          好懷念你上課都在講笑話，不像現在老師都在講些不重要的東西，例如數學題目，我們的數學計算方式，現今依舊深深地受到您的影響，非常可惜，現在老師不在大直，不能在你旁邊練習幹話，實在可惜，還願
+不用抱著被子哭。
+        </p>
+      </div>
+      <div class="card-footer">
+        <div class="sign">數學無法黨</div>
+        <div class="qed-stamp">28/9/2026</div>
+      </div>
+    </div>
+  </div>
+
+
+  <div id="toast"></div>
+
+  <script src="../global/questions.js"></script>
+  <script src="../global/global.js"></script>
+  <script>
+    // 初始化數學科問答，答對後啟動感性時光，隨後展開黑板感謝信
+    initSubjectQuiz('mathematic', () => {
+      startEmotionalIntro({
+        subject: 'mathematic',
+        teacherName: '楊欣璇老師',
+        cardTitle: '黑板感謝信',
+        onComplete: () => {
+          const stage = document.getElementById('card-stage');
+          stage.style.display = 'flex';
+          stage.classList.add('card-stage-appear');
+          showToast('🎉 祝 楊欣璇老師 教師節快樂！');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
